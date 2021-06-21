@@ -27,19 +27,6 @@ DROPBEAR_ECDSAKEY="/etc/dropbear/dropbear_ecdsa_host_key"
 DROPBEAR_RECEIVE_WINDOW=65536' > /etc/default/dropbear
 echo -e "[ ${GREEN}DONE${PLAIN} ]"
 
-# /etc/issue.net
-echo "[[ CYBERTIZE TERMS OF USE ]]
-
-  - NO DDOS
-  - NO TORREN
-  - NO FLOODING
-  - NO BUTEFORCE
-  - NO MULTI LOGIN
-
-url: https://cybertize.tk/
-email: contact@cybertize.tk
-telegram: https://t.me/ndiey" > /etc/issue.net
-
 echo ""
 echo -e "${GREEN}Congratulation, we are done with dropbear setup${PLAIN}"
 echo ""
