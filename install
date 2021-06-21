@@ -126,14 +126,14 @@ alias ll='ls $LS_OPTIONS -l'
 alias la='ls $LS_OPTIONS -a'" > ~/.bashrc
 source ~/.bashrc
 
-chmod +x $basepath/scripts/dropbear.bash
-chmod +x $basepath/scripts/openvpn.bash
-chmod +x $basepath/scripts/squid.bash
-chmod +x $basepath/scripts/stunnel.bash
-chmod +x $basepath/scripts/shadowsocks.bash
-chmod +x $basepath/scripts/badvpn.bash
-chmod +x $basepath/scripts/fail2ban.bash
-chmod +x $basepath/scripts/iptables.bash
+# chmod +x $basepath/scripts/dropbear.bash
+# chmod +x $basepath/scripts/openvpn.bash
+# chmod +x $basepath/scripts/squid.bash
+# chmod +x $basepath/scripts/stunnel.bash
+# chmod +x $basepath/scripts/shadowsocks.bash
+# chmod +x $basepath/scripts/badvpn.bash
+# chmod +x $basepath/scripts/fail2ban.bash
+# chmod +x $basepath/scripts/iptables.bash
 
 promptHelp() {
   echo "###############################################################"
