@@ -39,15 +39,15 @@ timedatectl set-timezone Asia/Kuala_Lumpur
   automake cmake apt-transport-https software-properties-common
 } &>/dev/null
 
-echo "#!/bin/bash
-----------------------------------------------------------------
-'||'  '|' '||''|.   .|'''.|  +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+
- '|.  .'   ||   ||  ||..  '  |C| |Y| |B| |E| |R| |T| |I| |Z| |E|
-  ||  |    ||...|'   ''|||.  +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+
-   |||     ||      .    '||  Created by Doctype
-    |     .||.      |'...|'  Copyright 2021 Cybertize,
-      Linux Debian-10        Allright Reserved.
-----------------------------------------------------------------" > /etc/update-motd.d/10-uname
+echo "#!/bin/bash" > /etc/update-motd.d/10-uname
+echo "----------------------------------------------------------------" >> /etc/update-motd.d/10-uname
+echo "'||'  '|' '||''|.   .|'''.|  +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+" >> /etc/update-motd.d/10-uname
+echo " '|.  .'   ||   ||  ||..  '  |C| |Y| |B| |E| |R| |T| |I| |Z| |E|" >> /etc/update-motd.d/10-uname
+echo "  ||  |    ||...|'   ''|||.  +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+" >> /etc/update-motd.d/10-uname
+echo "   |||     ||      .    '||  Created by Doctype" >> /etc/update-motd.d/10-uname
+echo "    |     .||.      |'...|'  Copyright 2021 Cybertize," >> /etc/update-motd.d/10-uname
+echo "      Linux Debian-10        Allright Reserved." >> /etc/update-motd.d/10-uname
+echo "----------------------------------------------------------------" >> /etc/update-motd.d/10-uname
 echo "" > /etc/motd
 
 echo "deb http://deb.debian.org/debian/ buster main
@@ -214,6 +214,9 @@ case "$1" in
   iptables )
     bash $basepath/scripts/iptables.bash
     break
+  ;;
+  plugins )
+    cp $basepath/plugins/menu /usr/local/bin/
   ;;
   help )
     promptHelp
