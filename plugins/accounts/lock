@@ -1,0 +1,12 @@
+#!/bin/bash
+
+read -p "[LOCK] Masukkan nama pengguna: " NAMAPENGGUNA
+egrep "^$NAMAPENGGUNA" /etc/passwd >/dev/null
+if [ $? -ne 0 ]; then
+  echo "Nama pengguna tidak ditemukan!"
+  exit 1
+fi
+passwd -l $NAMAPENGGUNA
+echo "======================================"
+echo "Berjaya kunci akaun pengguna."
+echo "======================================"

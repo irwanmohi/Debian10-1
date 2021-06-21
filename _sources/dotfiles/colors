@@ -1,0 +1,7 @@
+export RED="\E[31;1m"
+export GREEN="\E[32;1m"
+export YELLOW="\E[33;1m"
+export BLUE="\E[34;1m"
+export PURPLE="\E[35;1m"
+export CYAN="\E[36;1m"
+export PLAIN="\E[0m"

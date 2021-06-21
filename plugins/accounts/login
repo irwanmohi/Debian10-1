@@ -1,0 +1,35 @@
+#!/bin/bash
+
+DROPBEARPID=($(ps aux | grep -i dropbear | awk '{print $2}'))
+cat "/var/log/auth.log" | grep -i dropbear | grep -i "Password auth succeeded" > /tmp/dropbear_login.txt;
+echo "======================================"
+echo "[DROPBEAR] Senarai pengguna log masuk"
+echo "Proses ID - Nama pengguna - Alamat IP"
+echo "--------------------------------------"
+for DBPID in "${DROPBEARPID[@]}"
+do
+	cat /tmp/dropbear_login.txt | grep "dropbear\[$DBPID\]" > /tmp/dropbear_login_pid.txt;
+	JUMLAHPENGGUNA=$(cat /tmp/dropbear_login_pid.txt | wc -l)
+	NAMAPENGGUNA=$(cat /tmp/dropbear_login_pid.txt | awk '{print $10}')
+	ALAMATIP=$(cat /tmp/dropbear_login_pid.txt | awk '{print $12}')
+	if [ $JUMLAHPENGGUNA -eq 1 ]; then
+
+		echo "$DBPID - $NAMAPENGGUNA - $ALAMATIP";
+	fi
+done
+echo "======================================"
+echo ""
+echo ""
+echo "======================================"
+if [ -f "/var/log/openvpn/ovpn-auth.log" ]; then
+	line=`cat /var/log/openvpn/ovpn-auth.log | wc -l`
+	a=$((3+((line-8)/2)))
+	b=$(((line-8)/2))
+
+	echo "[OPENVPN] Senarai pengguna log masuk"
+	echo "Nama pengguna - Alamat IP - Log masuk"
+	echo "--------------------------------------"
+	cat /var/log/openvpn/ovpn-auth.log | head -n $a | tail -n $b | cut -d "," -f 1,2,5 | sed -e 's/,/   /g' > /tmp/vpn-login-db.txt
+	cat /tmp/vpn-login-db.txt
+fi
+echo "======================================"

@@ -1,0 +1,17 @@
+# /etc/aliases
+alias update="apt-get -qq update"
+alias upgrade="apt-get -y -qq upgrade"
+alias install="apt-get -y install $1"
+alias purge="apt-get -y purge $1"
+alias remove"apt-get -y -qq autoremove"
+alias clean="apt-get -y -qq autoclean"
+
+alias .cd="cd .."
+alias ..cd="cd ../.."
+alias ...cd="cd ../../.."
+
+alias start="systemctl start $1"
+alias stop="systemctl stop $1"
+alias status="systemctl status $1"
+alias enable="systemctl enable $1"
+alias disable="systemctl disable $1"

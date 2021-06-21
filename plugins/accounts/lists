@@ -1,0 +1,21 @@
+#!/bin/bash
+
+UIDN=1000
+echo "======================================"
+echo "[LISTS] Senarai akaun pengguna"
+echo "======================================"
+echo "Nama pengguna - Tarikh luput"
+echo "--------------------------------------"
+while read EXPIRED
+do
+    NAMAPENGGUNA="$(echo $EXPIRED | cut -d: -f1)"
+    IDPENGGUNA="$(echo $EXPIRED | grep -v nobody | cut -d: -f3)"
+    TARIKHLUPUT="$(chage -l $NAMAPENGGUNA | grep "Account expires" | awk -F": " '{print $2}')"
+    if [[ $IDPENGGUNA -ge 1000 ]]; then
+        printf "%-15s %2s\n" "$NAMAPENGGUNA" "$TARIKHLUPUT"
+    fi
+done < /etc/passwd
+JUMLAH="$(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
+echo "--------------------------------------"
+echo "Jumlah: $JUMLAH user"
+echo "======================================"

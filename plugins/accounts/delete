@@ -1,0 +1,12 @@
+#!/bin/bash
+
+read -p "[DELETE] Masukkan nama pengguna: " NAMAPENGGUNA
+egrep "^$NAMAPENGGUNA" /etc/passwd >/dev/null
+if [ $? -ne 0 ]; then
+    echo "Nama pengguna tidak ditemukan!"
+    exit 1
+fi
+userdel -f $NAMAPENGGUNA
+echo "======================================"
+echo "Berjaya padam akaun pengguna."
+echo "======================================"

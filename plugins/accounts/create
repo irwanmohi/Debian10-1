@@ -1,0 +1,30 @@
+#!/bin/bash
+
+read -p "Masukkan nama pengguna: " NAMAPENGGUNA
+read -p "Masukkan kata laluan: " KATALALUAN
+read -p "Tempoh masa aktif: " TEMPOHMASAAKTIF
+
+ALAMATIP=$( ip -4 addr | sed -ne 's|^.* inet \([^/]*\)/.* scope global.*$|\1|p' | head -1 )
+TANGGALHARIINI=$( date +%s )
+MASAAKTIFSAAT=$(( $TEMPOHMASAAKTIF * 86400 ))
+MASATAMATTEMPOH=$(( $TANGGALHARIINI + $MASAAKTIFSAAT ))
+TARIKHLUPUT=$( date -u --date="1970-01-01 $MASATAMATTEMPOH sec GMT" +%F )
+egrep "^$NAMAPENGGUNA" /etc/passwd >/dev/null
+if [ $? -eq 0 ]; then
+  echo "Nama pengguna sudah diguna!"
+  exit 0
+fi
+useradd $NAMAPENGGUNA
+usermod -s /bin/false $NAMAPENGGUNA
+usermod -e $TARIKHLUPUT $NAMAPENGGUNA
+echo -e "$KATALALUAN\n$KATALALUAN" | passwd $NAMAPENGGUNA &>/dev/null
+
+echo "-------------------------------"
+echo "ACCOUNT DETAILS"
+echo "-------------------------------"
+echo "Alamat IP: $ALAMATIP"
+echo "Nama pengguna: $NAMAPENGGUNA"
+echo "Kata laluan: $KATALALUAN"
+echo "Tempoh aktif: $TEMPOHMASAAKTIF hari"
+echo "Tarikh luput: $TARIKHLUPUT"
+echo "-------------------------------"

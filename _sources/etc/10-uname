@@ -1,0 +1,3 @@
+#!/bin/sh
+# /etc/update-motd.d/
+uname -snrvm

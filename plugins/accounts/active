@@ -1,0 +1,27 @@
+#!/bin/bash
+
+read -p "Masukkan nama pengguna: " NAMAPENGGUNA
+read -p "Tempoh masa aktif: " TEMPOHMASAAKTIF
+egrep "^$NAMAPENGGUNA" /etc/passwd >/dev/null
+if [ $? -ne 0 ]; then
+    echo "Nama pengguna tidak ditemukan!"
+    exit 1
+fi
+
+TANGGALHARIINI=$( date +%s )
+MASAAKTIFSAAT=$(( $TEMPOHMASAAKTIF * 86400 ))
+MASATAMATTEMPOH=$(( $TANGGALHARIINI + $MASAAKTIFSAAT ))
+TARIKHLUPUT=$( date -u --date="1970-01-01 $MASATAMATTEMPOH sec GMT" +%Y/%m/%d )
+
+passwd -u $NAMAPENGGUNA
+usermod -e $TARIKHLUPUT $NAMAPENGGUNA
+egrep "^$NAMAPENGGUNA" /etc/passwd >/dev/null
+echo -e "$password\n$password" | passwd $NAMAPENGGUNA &>/dev/null
+
+echo "---------------------------------------"
+echo "Extended Account Details"
+echo "---------------------------------------"
+echo "Nama pengguna: $NAMAPENGGUNA"
+echo "Tempoh aktif: $TEMPOHMASAAKTIF hari"
+echo "Tarikh luput: $TARIKHLUPUT"
+echo "--------------------------------------"
