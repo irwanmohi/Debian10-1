@@ -114,6 +114,7 @@ ulimit -n 51200
 mesg n || true' > ~/.profile
 source ~/.profile
 
+echo "" > ~/.bashrc
 echo "# ~/.bashrc: executed by bash(1) for non-login shells.
 # PS1='${debian_chroot:+($debian_chroot)}\h:\w\$ '
 # umask 022
