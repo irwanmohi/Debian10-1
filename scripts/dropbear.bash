@@ -15,7 +15,8 @@ apt-get -qq update &>/dev/null
 DEBIAN_FRONTEND=noninteractive apt-get -y -qq install dropbear &>/dev/null
 echo -e "[ ${GREEN}DONE${PLAIN} ]"
 
-# /etc/default/dropbear
+echo -n "Backup default config and create new config file for dropbear"
+cp /etc/default/dropbear /etc/default/dropbear.bak
 echo 'NO_START=0
 DROPBEAR_PORT=5968
 DROPBEAR_EXTRA_ARGS="-p 8695"
@@ -24,6 +25,7 @@ DROPBEAR_RSAKEY="/etc/dropbear/dropbear_rsa_host_key"
 DROPBEAR_DSSKEY="/etc/dropbear/dropbear_dss_host_key"
 DROPBEAR_ECDSAKEY="/etc/dropbear/dropbear_ecdsa_host_key"
 DROPBEAR_RECEIVE_WINDOW=65536' > /etc/default/dropbear
+echo -e "[ ${GREEN}DONE${PLAIN} ]"
 
 # /etc/issue.net
 echo "[[ CYBERTIZE TERMS OF USE ]]
@@ -42,7 +44,7 @@ echo ""
 echo -e "${GREEN}Congratulation, we are done with dropbear setup${PLAIN}"
 echo ""
 echo "=============================================="
-echo -e "${CYAN}[ STUNNEL DETAIL ]${PLAIN}"
+echo -e "${CYAN}[ DROPBEAR DETAIL ]${PLAIN}"
 echo "----------------------------------------------"
 echo -e "${YELLOW}Status:${PLAIN} ${GREEN}Started & Enabled${PLAIN}"
 echo -e "${YELLOW}Hostname:${PLAIN} ${GREEN}cybertize.tk${PLAIN}"
