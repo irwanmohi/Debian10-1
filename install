@@ -120,7 +120,7 @@ echo "# ~/.bashrc: executed by bash(1) for non-login shells.
 # umask 022
 
 export LS_OPTIONS='--color=auto'
-eval "`dircolors`"
+eval \"`dircolors`\"
 alias ls='ls $LS_OPTIONS'
 alias ll='ls $LS_OPTIONS -l'
 alias la='ls $LS_OPTIONS -a'" > ~/.bashrc
