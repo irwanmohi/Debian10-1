@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ipaddr=$( ip -4 addr | sed -ne 's|^.* inet \([^/]*\)/.* scope global.*$|\1|p' | head -1 )
-. $basepath/_sources/includes/colors
+. root/Debian10-main/_sources/includes/colors
 
 until [[ $YESNO =~ (y|n) ]]; do
   read -rp "Do you want to continue? [y/n]: " YESNO
