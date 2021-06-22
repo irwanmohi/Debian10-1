@@ -27,7 +27,7 @@ openssl req -new -x509 -days 365 -nodes \
 -out /etc/stunnel/stunnel.pem -keyout /etc/stunnel/stunnel.pem &>/dev/null
 
 # /etc/stunnel/stunnel.conf
-echo 'pid = /var/run/stunnel/stunnel4.pid
+echo 'pid = /var/run/stunnel4/stunnel4.pid
 output = /var/log/stunnel4/stunnel.log
 cert = /etc/stunnel/stunnel.pem
 debug = 4
