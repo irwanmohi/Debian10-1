@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 
+RED="\033[31;1m"
+GREEN="\033[32;1m"
+YELLOW="\033[33;1m"
+BLUE="\033[34;1m"
+PURPLE="\033[35;1m"
+CYAN="\033[36;1m"
+PLAIN="\033[0m"
+
 ipaddr=$( ip -4 addr | sed -ne 's|^.* inet \([^/]*\)/.* scope global.*$|\1|p' | head -1 )
-. root/Debian10-main/_sources/includes/colors
 
 until [[ $YESNO =~ (y|n) ]]; do
   read -rp "Do you want to continue? [y/n]: " YESNO
@@ -20,20 +27,16 @@ echo -n "Create openvpn cert and key "
 echo "Please wait, this will take a while..."
 
 cd /usr/share/easy-rsa
-{
-  ./easyrsa --batch init-pki
-  ./easyrsa --batch build-ca nopass
-  ./easyrsa --batch gen-dh
-  openvpn --genkey --secret /usr/share/easy-rsa/pki/ta.key
-  ./easyrsa --batch build-server-full server nopass
-} &>/dev/null
+./easyrsa --batch init-pki &>/dev/null
+./easyrsa --batch build-ca nopass &>/dev/null
+./easyrsa --batch gen-dh &>/dev/null
+./easyrsa --batch build-server-full server nopass &>/dev/null
 
 cp -R /usr/share/easy-rsa/pki /etc/openvpn/
 echo " Done"
 
 # /etc/openvpn/server.conf
-{
-  echo "# OVPN SERVER-CUSTOM CONFIG
+echo "# OVPN SERVER-CUSTOM CONFIG
 # ----------------------------
 port 5456
 proto tcp
@@ -43,7 +46,6 @@ ca /etc/openvpn/pki/ca.crt
 cert /etc/openvpn/pki/issued/server.crt
 key /etc/openvpn/pki/private/server.key
 dh /etc/openvpn/pki/dh.pem
-tls-auth /etc/openvpn/pki/ta.key 0
 
 verify-client-cert none
 server 10.8.0.0 255.255.255.0
@@ -63,11 +65,9 @@ verb 3
 mute 10
 plugin /usr/lib/x86_64-linux-gnu/openvpn/plugins/openvpn-plugin-auth-pam.so login
 username-as-common-name" > /etc/openvpn/server.conf
-} &>/dev/null
 
 # customClient.conf - Custom client config file
-{
-  echo "# OVPN CLIENT-CUSTOM CONFIG
+echo "# OVPN CLIENT-CUSTOM CONFIG
 # ----------------------------
 client
 dev tun
@@ -93,14 +93,9 @@ echo "<ca>" >> /etc/openvpn/client/client-custom.conf
 cat /etc/openvpn/pki/ca.crt >> /etc/openvpn/client/client-custom.conf
 echo "</ca>" >> /etc/openvpn/client/client-custom.conf
 echo "" >> /etc/openvpn/client/client-custom.conf
-echo "<tls-auth>" >> /etc/openvpn/client/client-custom.conf
-cat /etc/openvpn/pki/ta.key >> /etc/openvpn/client/client-custom.conf
-echo "</tls-auth>" >> /etc/openvpn/client/client-custom.conf
-} &>/dev/null
 
 # stunnelClient.conf - Stunnel client config file
-{
-  echo "# OVPN CLIENT-STUNNEL CONFIG
+echo "# OVPN CLIENT-STUNNEL CONFIG
 # ----------------------------
 client
 pull
@@ -120,10 +115,6 @@ echo "<ca>" >> /etc/openvpn/client/client-stunnel.conf
 cat /etc/openvpn/pki/ca.crt >> /etc/openvpn/client/client-stunnel.conf
 echo "</ca>" >> /etc/openvpn/client/client-stunnel.conf
 echo "" >> /etc/openvpn/client/client-stunnel.conf
-echo "<tls-auth>" >> /etc/openvpn/client/client-stunnel.conf
-cat /etc/openvpn/pki/ta.key >> /etc/openvpn/client/client-stunnel.conf
-echo "</tls-auth>" >> /etc/openvpn/client/client-stunnel.conf
-} &>/dev/null
 
 echo ""
 echo -e "${GREEN}Congratulation, we are done with openvpn setup${PLAIN}"
@@ -136,7 +127,6 @@ echo -e "${YELLOW}Hostname:${PLAIN} ${GREEN}cybertize.tk${PLAIN}"
 echo -e "${YELLOW}Ipaddress:${PLAIN} ${GREEN}$ipaddr${PLAIN}"
 echo -e "${YELLOW}Custom Client:${PLAIN} ${GREEN}5456${PLAIN}"
 echo -e "${YELLOW}Stunnel Client:${PLAIN} ${GREEN}6545${PLAIN}"
-echo -e "${YELLOW}Obfs Client:${PLAIN} ${GREEN}6753${PLAIN}"
 echo "----------------------------------------------"
 echo -e "${YELLOW}Start OpenVPN services:${PLAIN}"
 echo -e "${GREEN}systemctl start openvpn@server${PLAIN}"
