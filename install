@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 
-basepath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-ipaddr=$( ip -4 addr | sed -ne 's|^.* inet \([^/]*\)/.* scope global.*$|\1|p' | head -1 )
-
 . /etc/os-release
-. $basepath/_sources/includes/colors
+
+RED="\033[31;1m"
+GREEN="\033[32;1m"
+YELLOW="\033[33;1m"
+BLUE="\033[34;1m"
+PURPLE="\033[35;1m"
+CYAN="\033[36;1m"
+PLAIN="\033[0m"
+
+ipaddr=$( ip -4 addr | sed -ne 's|^.* inet \([^/]*\)/.* scope global.*$|\1|p' | head -1 )
+basepath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 echo -e "${CYAN}Before that please make sure:${PLAIN}"
 echo -e "[${GREEN}●${PLAIN}]  You have internet connection."
@@ -33,21 +40,20 @@ fi
 
 timedatectl set-timezone Asia/Kuala_Lumpur
 
-{
-  apt-get -qq update && apt-get -y -qq upgrade
-  apt-get -y -qq install build-essential curl git unzip libtool autoconf \
-  automake cmake apt-transport-https software-properties-common
-} &>/dev/null
+apt-get -qq update &>/dev/null
+apt-get -y -qq upgrade &>/dev/null
+apt-get -y -qq install build-essential curl git unzip libtool autoconf automake cmake &>/dev/null
+apt-get -y -qq install apt-transport-https software-properties-common &>/dev/null
 
-echo "#!/bin/bash" > /etc/update-motd.d/10-uname
-echo "----------------------------------------------------------------" >> /etc/update-motd.d/10-uname
-echo "'||'  '|' '||''|.   .|'''.|  +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+" >> /etc/update-motd.d/10-uname
-echo " '|.  .'   ||   ||  ||..  '  |C| |Y| |B| |E| |R| |T| |I| |Z| |E|" >> /etc/update-motd.d/10-uname
-echo "  ||  |    ||...|'   ''|||.  +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+" >> /etc/update-motd.d/10-uname
-echo "   |||     ||      .    '||  Created by Doctype" >> /etc/update-motd.d/10-uname
-echo "    |     .||.      |'...|'  Copyright 2021 Cybertize," >> /etc/update-motd.d/10-uname
-echo "      Linux Debian-10        Allright Reserved." >> /etc/update-motd.d/10-uname
-echo "----------------------------------------------------------------" >> /etc/update-motd.d/10-uname
+echo "#!/bin/bash
+echo \"----------------------------------------------------------------\"
+echo \"'||'  '|' '||''|.   .|'''.|  +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+\"
+echo \" '|.  .'   ||   ||  ||..  '  |C| |Y| |B| |E| |R| |T| |I| |Z| |E|\"
+echo \"  ||  |    ||...|'   ''|||.  +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+\"
+echo \"   |||     ||      .    '||  Created by Doctype\"
+echo \"    |     .||.      |'...|'  Copyright 2021 Cybertize,\"
+echo \"      Linux Debian-10        Allright Reserved.\"
+echo \"----------------------------------------------------------------\"" > /etc/update-motd.d/10-uname
 echo "" > /etc/motd
 
 echo "deb http://deb.debian.org/debian/ buster main
@@ -73,8 +79,7 @@ email: contact@cybertize.tk
 telegram: https://t.me/ndiey" > /etc/issue.net
 
 # /etc/sysctl.conf
-{
-  echo "net.ipv6.conf.all.disable_ipv6 = 1
+echo "net.ipv6.conf.all.disable_ipv6 = 1
 net.ipv4.ip_forward=1
 net.core.default_qdisc=fq
 net.ipv4.tcp_congestion_control=bbr
@@ -97,13 +102,10 @@ net.ipv4.tcp_rmem = 4096 87380 67108864
 net.ipv4.tcp_wmem = 4096 65536 67108864
 net.ipv4.tcp_mtu_probing = 1
 net.ipv4.tcp_congestion_control = hybla" > /etc/sysctl.conf
-} &>/dev/null
-
 sysctl -p &>/dev/null
 
 # /etc/shells
-{
-  echo "# /etc/shells: valid login shells
+echo "# /etc/shells: valid login shells
 /bin/sh
 /bin/bash
 /usr/bin/bash
@@ -114,7 +116,6 @@ sysctl -p &>/dev/null
 /usr/bin/screen
 /bin/false
 /usr/bin/false" > /etc/shells
-} &>/dev/null
 
 echo '# ~/.profile: executed by Bourne-compatible login shells.
 if [ "$BASH" ]; then
@@ -138,15 +139,6 @@ alias ls='ls $LS_OPTIONS'
 alias ll='ls $LS_OPTIONS -l'
 alias la='ls $LS_OPTIONS -a'" > ~/.bashrc
 source ~/.bashrc
-
-# chmod +x $basepath/scripts/dropbear.bash
-# chmod +x $basepath/scripts/openvpn.bash
-# chmod +x $basepath/scripts/squid.bash
-# chmod +x $basepath/scripts/stunnel.bash
-# chmod +x $basepath/scripts/shadowsocks.bash
-# chmod +x $basepath/scripts/badvpn.bash
-# chmod +x $basepath/scripts/fail2ban.bash
-# chmod +x $basepath/scripts/iptables.bash
 
 promptHelp() {
   echo "###############################################################"
