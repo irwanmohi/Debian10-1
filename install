@@ -164,6 +164,7 @@ promptHelp() {
   echo -e "${GREEN}  fail2ban${PLAIN}       Install Fail2Ban package from apt sources"
   echo -e "${GREEN}  iptables${PLAIN}       Set firewall rules and loads on boot"
   echo -e "${GREEN}  plugins${PLAIN}        Copy plugin file and give execution mod"
+  echo -e "${GREEN}  help${PLAIN}           Showing this helper screen"
   echo ""
   echo "################################################################"
 }
