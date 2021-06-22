@@ -219,7 +219,7 @@ while true ; do
       break
     ;;
     * )
-      echo -e "You have entered wrong option."
+      echo -e "[${RED}●${PLAIN}] You have entered wrong option."
       exit 0
     ;;
   esac
