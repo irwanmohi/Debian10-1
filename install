@@ -167,56 +167,59 @@ promptHelp() {
   echo ""
   echo "################################################################"
 }
-
-if [[ $# = 0 ]]; then
-  promptHelp && exit
-fi
-case "$1" in
-  dropbear )
-    bash $basepath/scripts/dropbear.bash
-    break
-  ;;
-  openvpn )
-    bash $basepath/scripts/openvpn.bash
-    break
-  ;;
-  squid )
-    bash $basepath/scripts/squid.bash
-    break
-  ;;
-  stunnel )
-    bash $basepath/scripts/stunnel.bash
-    break
-  ;;
-  shadowsocks )
-    bash $basepath/scripts/shadowsocks.bash
-    break
-  ;;
-  badvpn )
-    bash $basepath/scripts/badvpn.bash
-    break
-  ;;
-  webmin )
-    bash $basepath/scripts/webmin.bash
-    break
-  ;;
-  fail2ban )
-    bash $basepath/scripts/fail2ban.bash
-    break
-  ;;
-  iptables )
-    bash $basepath/scripts/iptables.bash
-    break
-  ;;
-  plugins )
-    cp $basepath/plugins/menu /usr/local/bin/
-  ;;
-  help )
-    promptHelp
-    break
-  ;;
-  * )
-    echo -e "You have entered wrong option."
-    exit 0
-  ;;
-esac
+while true ; do
+  if [[ $# = 0 ]]; then
+    promptHelp && exit
+  fi
+  
+  case "$1" in
+    dropbear )
+      bash $basepath/scripts/dropbear.bash
+      break
+    ;;
+    openvpn )
+      bash $basepath/scripts/openvpn.bash
+      break
+    ;;
+    squid )
+      bash $basepath/scripts/squid.bash
+      break
+    ;;
+    stunnel )
+      bash $basepath/scripts/stunnel.bash
+      break
+    ;;
+    shadowsocks )
+      bash $basepath/scripts/shadowsocks.bash
+      break
+    ;;
+    badvpn )
+      bash $basepath/scripts/badvpn.bash
+      break
+    ;;
+    webmin )
+      bash $basepath/scripts/webmin.bash
+      break
+    ;;
+    fail2ban )
+      bash $basepath/scripts/fail2ban.bash
+      break
+    ;;
+    iptables )
+      bash $basepath/scripts/iptables.bash
+      break
+    ;;
+    plugins )
+      bash $basepath/scripts/plugins.bash
+      break
+    ;;
+    help )
+      promptHelp
+      break
+    ;;
+    * )
+      echo -e "You have entered wrong option."
+      exit 0
+    ;;
+  esac
+done
