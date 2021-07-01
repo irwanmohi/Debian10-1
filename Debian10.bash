@@ -441,19 +441,6 @@ echo -e "[ ${GREEN}DONE${PLAIN} ]"
 echo -n "Create iptables rules file..."
 echo '#!/usr/bin/env bash
 
-# Remove any existing rules from all chains
-iptables -F
-iptables -F -t nat
-iptables -F -t mangle
-
-# Remove any pre-existing user-defined rules
-iptables -X
-iptables -X -t nat
-iptables -X -t mangle
-
-# Zero the counters
-iptables -Z
-
 # Trust the local host
 iptables -A INPUT -i lo -j ACCEPT
 iptables -A OUTPUT -o lo -j ACCEPT
@@ -486,3 +473,31 @@ iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 # NAT rules
 iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE' > /etc/iptables.up.rules
 echo -e "[ ${GREEN}DONE${PLAIN} ]"
+
+iptables-save > /etc/iptables.up.rules
+iptables-restore < /etc/iptables.up.rules
+
+##
+# plugins file
+#
+echo -n "Copy and Chmod Plugin files..."
+wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/menu" &>/dev/null
+wget -O /usr/local/bin/create "https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/accounts/create" &>/dev/null
+wget -O /usr/local/bin/active "https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/accounts/active" &>/dev/null
+wget -O /usr/local/bin/password "https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/accounts/password" &>/dev/null
+wget -O /usr/local/bin/login "https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/accounts/login" &>/dev/null
+wget -O /usr/local/bin/lists "https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/accounts/lists" &>/dev/null
+wget -O /usr/local/bin/lock "https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/accounts/lock" &>/dev/null
+wget -O /usr/local/bin/unlock "https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/accounts/unlock" &>/dev/null
+wget -O /usr/local/bin/delete "https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/accounts/delete" &>/dev/null
+wget -O /usr/local/bin/speedtest "https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/server/speedtest" &>/dev/null
+wget -O /usr/local/bin/detail "https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/server/detail" &>/dev/null
+echo -e "[ ${GREEN}DONE${PLAIN} ]"
+
+chmod u+x /usr/local/bin/menu
+
+echo ""
+echo ""
+echo -e "${GREEN}Congratulation, we are done with the setup${PLAIN}"
+echo ""
+echo ""
