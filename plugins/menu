@@ -25,7 +25,6 @@ echo -e "${PURPLE}    |     .||.      |'...|'${PLAIN}  ${GREEN}Copyright 2021 Cy
 echo -e "${PURPLE}      Linux Debian-10      ${PLAIN}  ${GREEN}Allright Reserved.${PLAIN}"
 echo -e "${CYAN}----------------------------------------------------------------${PLAIN}"
 echo -e "${BLUE}CYBERTIZE PLUGIN MAIN MENU${PLAIN}"
-echo -e "${CYAN}01${PLAIN}) ${GREEN}Trial${PLAIN}      - ${YELLOW}Jana akaun percubaan untuk dropbear & openvpn${PLAIN}"
 echo -e "${CYAN}02${PLAIN}) ${GREEN}create${PLAIN}     - ${YELLOW}Buat akaun pengguna untuk dropbear & openvpn${PLAIN}"
 echo -e "${CYAN}03${PLAIN}) ${GREEN}active${PLAIN}     - ${YELLOW}Tukar tempoh tarikh luput akaun pengguna${PLAIN}"
 echo -e "${CYAN}04${PLAIN}) ${GREEN}password${PLAIN}   - ${YELLOW}Tukar kata laluan akaun pengguna${PLAIN}"
@@ -34,45 +33,51 @@ echo -e "${CYAN}06${PLAIN}) ${GREEN}lists${PLAIN}      - ${YELLOW}Senaraikan sem
 echo -e "${CYAN}07${PLAIN}) ${GREEN}lock${PLAIN}       - ${YELLOW}Kunci atau nyahdayakan akaun pengguna${PLAIN}"
 echo -e "${CYAN}08${PLAIN}) ${GREEN}unlock${PLAIN}     - ${YELLOW}Buka kunci atau dayakan akaun pengguna${PLAIN}"
 echo -e "${CYAN}09${PLAIN}) ${GREEN}delete${PLAIN}     - ${YELLOW}Padamkan akaun pengguna${PLAIN}"
+echo -e "${CYAN}09${PLAIN}) ${GREEN}speedtest${PLAIN}  - ${YELLOW}Server speedtest${PLAIN}"
+echo -e "${CYAN}09${PLAIN}) ${GREEN}detail${PLAIN}     - ${YELLOW}Rinkasan maklumat server${PLAIN}"
 echo ""
 read -p "Sila pilih salah satu menu yang tersenarai " MENUCHOICE
 
 while true ; do
   case $MENUCHOICE in
-    01|trial )
-      bash /usr/local/bin/trial
-      break
-    ;;
-    02|create )
+    01|create )
       bash /usr/local/bin/create
       break
     ;;
-    03|active )
+    02|active )
       bash /usr/local/bin/active
       break
     ;;
-    04|password )
+    03|password )
       bash /usr/local/bin/password
       break
     ;;
-    05|login )
+    04|login )
       bash /usr/local/bin/login
       break
     ;;
-    06|lists )
+    05|lists )
       bash /usr/local/bin/lists
       break
     ;;
-    07|lock )
+    06|lock )
       bash /usr/local/bin/lock
       break
     ;;
-    08|unlock )
+    07|unlock )
       bash /usr/local/bin/unlock
       break
     ;;
-    09|delete )
+    08|delete )
       bash /usr/local/bin/delete
+      break
+    ;;
+    09|speedtest )
+      bash /usr/local/bin/speedtest
+      break
+    ;;
+    10|detail )
+      bash /usr/local/bin/detail
       break
     ;;
     * )
