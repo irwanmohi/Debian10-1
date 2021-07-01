@@ -1,9 +1,9 @@
 # CYBERTIZE SETUP MANAGER [VPS]
 
 #### Cara guna:
-Langkah pertama: Log masuk ke VPS anda.
-Langkah kedua: Masukkan perintah: wget "https://raw.githubusercontent.com/cybertize-dev/Debian10/main/install"
-Langkah ketiga: Masukkan perintah: bash install
+**Langkah pertama**: Log masuk ke VPS anda.
+**Langkah kedua**: Masukkan perintah: wget "https://raw.githubusercontent.com/cybertize-dev/Debian10/main/install"
+**Langkah ketiga**: Masukkan perintah: bash install
 
 #### Untuk paparkan menu masukkan perintah: menu
 
