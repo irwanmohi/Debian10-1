@@ -1,5 +1,4 @@
-# Debian10
-CYBERTIZE SETUP MANAGER [VPS]
+# CYBERTIZE SETUP MANAGER [VPS]
 
 #### Cara guna:
 Langkah pertama: Log masuk ke VPS anda.
