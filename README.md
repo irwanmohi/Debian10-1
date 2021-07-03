@@ -21,6 +21,6 @@
 
   badvpn [-p 7300]
 
-  shadowsocks [-p 6242] [-p 2426]
+  shadowsocks [-p 6242]
 
   webmin [-p 10000]
