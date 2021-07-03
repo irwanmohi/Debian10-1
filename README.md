@@ -23,6 +23,4 @@
 
   shadowsocks [-p 6242] [-p 2426]
 
-  wireguard [-p 3576] [-p 6753]
-
   webmin [-p 10000]
