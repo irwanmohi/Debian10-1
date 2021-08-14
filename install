@@ -464,17 +464,17 @@ iptables-restore < /etc/iptables.up.rules
 # plugins file
 #
 echo -n "Copy and Chmod Plugin files..."
-wget -P /usr/local/bin https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/menu &>/dev/null
-wget -P /usr/local/bin https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/accounts/create &>/dev/null
-wget -P /usr/local/bin https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/accounts/active &>/dev/null
-wget -P /usr/local/bin https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/accounts/password &>/dev/null
-wget -P /usr/local/bin https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/accounts/login &>/dev/null
-wget -P /usr/local/bin https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/accounts/lists &>/dev/null
-wget -P /usr/local/bin https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/accounts/lock &>/dev/null
-wget -P /usr/local/bin https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/accounts/unlock &>/dev/null
-wget -P /usr/local/bin https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/accounts/delete &>/dev/null
-wget -P /usr/local/bin https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/server/speedtest &>/dev/null
-wget -P /usr/local/bin https://raw.githubusercontent.com/cybertize-dev/Debian10/main/plugins/server/detail &>/dev/null
+wget -P /usr/local/bin https://raw.githubusercontent.com/irwanmohi/Debian10-1/main/plugins/menu &>/dev/null
+wget -P /usr/local/bin https://raw.githubusercontent.com/irwanmohi/Debian10-1/main/plugins/accounts/create &>/dev/null
+wget -P /usr/local/bin https://raw.githubusercontent.com/irwanmohi/Debian10-1/main/plugins/accounts/active &>/dev/null
+wget -P /usr/local/bin https://raw.githubusercontent.com/irwanmohi/Debian10-1/main/plugins/accounts/password &>/dev/null
+wget -P /usr/local/bin https://raw.githubusercontent.com/irwanmohi/Debian10-1/main/plugins/accounts/login &>/dev/null
+wget -P /usr/local/bin https://raw.githubusercontent.com/irwanmohi/Debian10-1/main/plugins/accounts/lists &>/dev/null
+wget -P /usr/local/bin https://raw.githubusercontent.com/irwanmohi/Debian10-1/main/plugins/accounts/lock &>/dev/null
+wget -P /usr/local/bin https://raw.githubusercontent.com/irwanmohi/Debian10-1/main/plugins/accounts/unlock &>/dev/null
+wget -P /usr/local/bin https://raw.githubusercontent.com/irwanmohi/Debian10-1/main/plugins/accounts/delete &>/dev/null
+wget -P /usr/local/bin https://raw.githubusercontent.com/irwanmohi/Debian10-1/main/plugins/server/speedtest &>/dev/null
+wget -P /usr/local/bin https://raw.githubusercontent.com/irwanmohi/Debian10-1/main/plugins/server/detail &>/dev/null
 echo -e "[ ${GREEN}DONE${PLAIN} ]"
 
 chmod u+x /usr/local/bin/menu
